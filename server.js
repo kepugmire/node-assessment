@@ -1,12 +1,14 @@
 const   express = require('express'),
         bodyParser = require('body-parser'),
-        port = 3000,
         usersCtrl = require('./usersCtrl')
+        port = 3000,
         app = express();
+
 
 app.use(bodyParser.json());
 
-//endpoints
+
+//========= END POINTS =========//
 app.get('/api/users', usersCtrl.allUsers)
 app.get('/api/users/:id', usersCtrl.userId)
 app.get('/api/admins', usersCtrl.getAdmins)

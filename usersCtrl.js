@@ -1,20 +1,21 @@
 const userData = require('./userData.json')
 
+
 module.exports = {
 
     allUsers: (req, res) => {
         let favoriteUsers = userData.filter((e) => {
             if (req.query.favorites) {
-                return e.favorites.includes('react') 
-            }else if (req.query.age) {
+                return e.favorites.includes('react')
+            } else if (req.query.age) {
                 return req.query.age > e.age
-            }else if (req.query.lastname) {
+            } else if (req.query.lastname) {
                 return req.query.lastname === e.last_name
-            }else if (req.query.email) {
+            } else if (req.query.email) {
                 return req.query.email === e.email
             }
             return true
-            })
+        })
         res.status(200).send(favoriteUsers)
     },
     userId: (req, res) => {
@@ -29,7 +30,7 @@ module.exports = {
     },
     getAdmins: (req, res) => {
         let admins = []
-        for (let i = userData.length-1; i >=0; i--) {
+        for (let i = userData.length - 1; i >= 0; i--) {
             if (userData[i].type === 'admin') {
                 admins.unshift(userData[i])
             }
@@ -37,32 +38,31 @@ module.exports = {
         res.status(200).send(admins)
     },
     notAdmins: (req, res) => {
-        let peons = []
+        let notAdm = []
         for (let i = 0; i < userData.length; i++) {
             if (userData[i].type !== 'admin') {
-                peons.push(userData[i])
+                notAdm.push(userData[i])
             }
         }
-        res.status(200).send(peons)
+        res.status(200).send(notAdm)
     },
     getByType: (req, res) => {
-        myFunc = userData.filter((e) => {
-            return e.type === req.params.type
+        func = userData.filter((x) => {
+            return x.type === req.params.type
         })
-        res.status(200).send(myFunc)
+        res.status(200).send(func)
     },
     updateUser: (req, res) => {
-        let update = userData.splice(req.params.id-1,1,req.body)
+        let update = userData.splice(req.params.id-1, 1, req.body)
         res.status(200).send(userData)
     },
     addUser: (req, res) => {
-        req.body.id = userData.length + 1
+        req.body.id = userData.length+1
         userData.push(req.body)
         res.status(200).send(userData)
     },
     deleteUser: (req, res) => {
-        let remove = userData.splice(req.params.id-1, 1)
+        let remove = userData.splice(req.params.id - 1, 1)
         res.status(200).send(userData)
     }
-
 }

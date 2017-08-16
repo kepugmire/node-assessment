@@ -4,7 +4,7 @@ const   express = require('express'),
         port = 3000,
         app = express();
 
-
+//===SENDS DATA THROUGH PARSER===//
 app.use(bodyParser.json());
 
 
@@ -19,5 +19,5 @@ app.post('/api/users', usersCtrl.addUser)
 app.delete('/api/users/:id', usersCtrl.deleteUser)
 
 
-
+//===LISTENS ON ASSIGNED PORT===//
 app.listen(port, () => console.log(`Listening on ${port}`))
